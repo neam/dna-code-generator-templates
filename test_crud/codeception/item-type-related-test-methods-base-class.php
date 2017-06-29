@@ -169,6 +169,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
         foreach ($<?= lcfirst($modelClassSingular) ?>Query->find() as $<?= lcfirst($modelClassSingular) ?>) {
             $entry = [];
             $entry["id"] = $<?= lcfirst($modelClassSingular) ?>->getId();
+            $entry["item_label"] = $<?= lcfirst($modelClassSingular) ?>->getItemLabel();
             $actual[] = $entry;
         }
         return $actual;

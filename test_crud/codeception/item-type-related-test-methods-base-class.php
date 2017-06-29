@@ -103,6 +103,18 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     }
 
     /**
+     * @When I :filterMethod, I should have :count <?= strtolower($unprefixedLabelPlural) . "\n" ?>
+     */
+    public function iFilterMethodIShouldHaveCount<?= $modelClassPlural ?>(
+        $filterMethod,
+        $count
+    ) {
+        $<?= lcfirst($modelClassSingular) ?>Query = models\<?= $modelClassSingular ?>Query::create();
+        $<?= lcfirst($modelClassSingular) ?>Query->$filterMethod();
+        $this->assertEquals($count, $<?= lcfirst($modelClassSingular) ?>Query->count());
+    }
+
+    /**
      * @When I :filterMethod, I should see the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
     public function iIFilterMethodIShouldSeeTheFollowing<?= $modelClassPlural ?>(
@@ -138,6 +150,19 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
         );
         $this->assertEquals($expected, $actual, "<?= ucfirst(strtolower($unprefixedLabelPlural)) ?> match expected");
 
+    }
+
+    /**
+     * @When I :filterMethod with id :id, I should have :count <?= strtolower($unprefixedLabelPlural) . "\n" ?>
+     */
+    public function iFilterMethodWithIdIShouldHaveCount<?= $modelClassPlural ?>(
+        $filterMethod,
+        $id,
+        $count
+    ) {
+        $<?= lcfirst($modelClassSingular) ?>Query = models\<?= $modelClassSingular ?>Query::create();
+        $<?= lcfirst($modelClassSingular) ?>Query->$filterMethod($id);
+        $this->assertEquals($count, $<?= lcfirst($modelClassSingular) ?>Query->count());
     }
 
     /**

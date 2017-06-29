@@ -105,7 +105,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
 
         $this->assertEquals(
             count($expected),
-            $<?= lcfirst($modelClassSingular) ?>Query->count(),
+            count($actual), //$<?= lcfirst($modelClassSingular) ?>Query->count(),
             "Amount of <?= strtolower($unprefixedLabelPlural) ?> match expected"
         );
         $this->assertEquals($expected, $actual, "<?= ucfirst(strtolower($unprefixedLabelPlural)) ?> match expected");
@@ -155,7 +155,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
 
         $this->assertEquals(
             count($expected),
-            $<?= lcfirst($modelClassSingular) ?>Query->count(),
+            count($actual), //$<?= lcfirst($modelClassSingular) ?>Query->count(),
             "Amount of <?= strtolower($unprefixedLabelPlural) ?> match expected"
         );
         $this->assertEquals($expected, $actual, "<?= ucfirst(strtolower($unprefixedLabelPlural)) ?> match expected");
@@ -208,7 +208,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
 
         $this->assertEquals(
             count($expected),
-            $<?= lcfirst($modelClassSingular) ?>Query->count(),
+            count($actual), //$<?= lcfirst($modelClassSingular) ?>Query->count(),
             "Amount of <?= strtolower($unprefixedLabelPlural) ?> match expected"
         );
         $this->assertEquals($expected, $actual, "<?= ucfirst(strtolower($unprefixedLabelPlural)) ?> match expected");

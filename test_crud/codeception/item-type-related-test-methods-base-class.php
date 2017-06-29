@@ -68,6 +68,16 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     }
 
     /**
+     * @Then I should have :count <?= strtolower($unprefixedLabelPlural) . "\n" ?>
+     */
+    public function iShouldHaveCount<?= $modelClassPlural ?>(
+        $count
+    ) {
+        $<?= lcfirst($modelClassSingular) ?>Query = models\<?= $modelClassSingular ?>Query::create();
+        $this->assertEquals($count, $<?= lcfirst($modelClassSingular) ?>Query->count());
+    }
+
+    /**
      * @Then I should have the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
     public function iShouldHaveTheFollowing<?= $modelClassPlural ?>(

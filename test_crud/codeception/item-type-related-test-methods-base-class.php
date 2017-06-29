@@ -41,6 +41,8 @@ use \propel\models;
 class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
 {
 
+    public $defaultPerspective = "basics";
+
     /**
      * @Given I have the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
@@ -66,9 +68,18 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     }
 
     /**
-     * @Then I should have the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     * @Then I should have the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
     public function iShouldHaveTheFollowing<?= $modelClassPlural ?>(
+        \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
+    ) {
+        $this->iShouldHaveTheFollowing<?= $modelClassPlural ?>ByPerspective($this->defaultPerspective, $expected<?= $modelClassPlural ?>);
+    }
+
+    /**
+     * @Then I should have the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     */
+    public function iShouldHaveTheFollowing<?= $modelClassPlural ?>ByPerspective(
         $perspective,
         \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
     ) {
@@ -92,9 +103,19 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     }
 
     /**
-     * @When I :filterMethod, I should see the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     * @When I :filterMethod, I should see the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
     public function iIFilterMethodIShouldSeeTheFollowing<?= $modelClassPlural ?>(
+        $filterMethod,
+        \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
+    ) {
+        $this->iIFilterMethodIShouldSeeTheFollowing<?= $modelClassPlural ?>ByPerspective($filterMethod, $this->defaultPerspective, $expected<?= $modelClassPlural ?>);
+    }
+
+    /**
+     * @When I :filterMethod, I should see the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     */
+    public function iIFilterMethodIShouldSeeTheFollowing<?= $modelClassPlural ?>ByPerspective(
         $filterMethod,
         $perspective,
         \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
@@ -120,9 +141,20 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     }
 
     /**
-     * @When I :filterMethod with id :id, I should see the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     * @When I :filterMethod with id :id, I should see the following <?= strtolower($unprefixedLabelPlural) ?>:
      */
     public function iFilterMethodWithIdIShouldSeeTheFollowing<?= $modelClassPlural ?>(
+        $filterMethod,
+        $id,
+        \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
+    ) {
+        $this->iFilterMethodWithIdIShouldSeeTheFollowing<?= $modelClassPlural ?>ByPerspective($filterMethod, $id, $this->defaultPerspective, $expected<?= $modelClassPlural ?>);
+    }
+
+    /**
+     * @When I :filterMethod with id :id, I should see the following <?= strtolower($unprefixedLabelPlural) ?> (perspective: :perspective):
+     */
+    public function iFilterMethodWithIdIShouldSeeTheFollowing<?= $modelClassPlural ?>ByPerspective(
         $filterMethod,
         $id,
         $perspective,

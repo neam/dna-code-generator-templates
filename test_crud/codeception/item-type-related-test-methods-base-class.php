@@ -41,6 +41,8 @@ use \propel\models;
 class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
 {
 
+    use \DnaTestRelatedMethodsTrait;
+
     public $defaultPerspective = "basics";
 
     /**
@@ -98,10 +100,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
         $<?= lcfirst($modelClassSingular) ?>Query = models\<?= $modelClassSingular ?>Query::create();
         $actual = $this-><?= lcfirst($modelClassSingular) ?>QueryToArray($<?= lcfirst($modelClassSingular) ?>Query, $perspective);
 
-        codecept_debug("Expected:");
-        codecept_debug($this->itemArrayAsTableString($expected));
-        codecept_debug("Actual:");
-        codecept_debug($this->itemArrayAsTableString($actual));
+        $this->outputExpectedAndActual($expected, $actual);
 
         $this->assertEquals(
             count($expected),
@@ -148,10 +147,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
         $<?= lcfirst($modelClassSingular) ?>Query->$filterMethod();
         $actual = $this-><?= lcfirst($modelClassSingular) ?>QueryToArray($<?= lcfirst($modelClassSingular) ?>Query, $perspective);
 
-        codecept_debug("Expected:");
-        codecept_debug($this->itemArrayAsTableString($expected));
-        codecept_debug("Actual:");
-        codecept_debug($this->itemArrayAsTableString($actual));
+        $this->outputExpectedAndActual($expected, $actual);
 
         $this->assertEquals(
             count($expected),
@@ -201,10 +197,7 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
         $<?= lcfirst($modelClassSingular) ?>Query->$filterMethod($id);
         $actual = $this-><?= lcfirst($modelClassSingular) ?>QueryToArray($<?= lcfirst($modelClassSingular) ?>Query, $perspective);
 
-        codecept_debug("Expected:");
-        codecept_debug($this->itemArrayAsTableString($expected));
-        codecept_debug("Actual:");
-        codecept_debug($this->itemArrayAsTableString($actual));
+        $this->outputExpectedAndActual($expected, $actual);
 
         $this->assertEquals(
             count($expected),

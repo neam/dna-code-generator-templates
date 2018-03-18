@@ -33,7 +33,10 @@ class <?= $helperName . "\n" ?>
         $modelClass = str_replace('propel\\models\\', '', $modelClass);
         $labels = static::choiceFormatLabels();
         if (!isset($labels[$modelClass])) {
-            throw new ItemTypeLabelMissingException("No label specified for item type $modelClass");
+            $modelClassSingular = $modelClass;
+            $modelClassSingularWords = PhInflector::camel2words($modelClassSingular);
+            $modelClassPluralWords = PhInflector::pluralize($modelClassSingularWords);
+            return 'n==0#' . ucfirst($modelClassSingularWords) . '(s)|n==1#' . ucfirst($modelClassSingularWords) . '|n>1#' . ucfirst($modelClassPluralWords) . '';
         }
         return $labels[$modelClass];
 

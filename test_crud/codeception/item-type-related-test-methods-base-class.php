@@ -51,20 +51,30 @@ class <?= $modelClassSingular ?>RelatedTestMethods extends \DbDependentCodeGuy
     public function iHaveTheFollowing<?= $modelClassPlural ?>(
         \Behat\Gherkin\Node\TableNode $expected<?= $modelClassPlural . "\n" ?>
     ) {
-        $expected = $this->tableNodeToArray($expected<?= $modelClassPlural ?>);
 
-        foreach ($expected as $itemEntry) {
-            $item = new models\<?= $modelClassSingular ?>();
-            $expectedId = $itemEntry["id"];
-            unset($itemEntry["id"]);
-            foreach ($itemEntry as $attribute => $value) {
-                if ($value === "") {
-                    $value = null;
+        try {
+
+            $expected = $this->tableNodeToArray($expected<?= $modelClassPlural ?>);
+
+            foreach ($expected as $itemEntry) {
+                $item = new models\<?= $modelClassSingular ?>();
+                $expectedId = $itemEntry["id"];
+                unset($itemEntry["id"]);
+                foreach ($itemEntry as $attribute => $value) {
+                    if ($value === "") {
+                        $value = null;
+                    }
+                    $item->setByName($attribute, $value, TableMap::TYPE_FIELDNAME);
                 }
-                $item->setByName($attribute, $value, TableMap::TYPE_FIELDNAME);
+                $item->save();
+                $this->assertEquals($expectedId, $item->getId());
             }
-            $item->save();
-            $this->assertEquals($expectedId, $item->getId());
+
+        } catch (\Exception $e) {
+
+            $this->codeceptDebugException($e);
+            $this->assertEmpty("Exception occurred");
+
         }
 
     }
